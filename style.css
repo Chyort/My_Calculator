@@ -1,0 +1,60 @@
+body {
+    box-sizing: border-box;
+}
+
+.pageHeader {
+    background-color: black;
+    color: dodgerblue;
+    text-align: center;
+}
+
+.calculator{
+    background-color: dimgrey;
+}
+
+.row.display-flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+.row.display-flex > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
+}
+
+.row.buttons {
+    margin: 5%;
+}
+
+.output {
+    background: linear-gradient(grey, yellowgreen);
+    font-family: 'VT323', monospace;
+    margin: 1% 0;
+}
+
+.output h1 {
+    font-size: 10vw;
+}
+
+.buttons {
+    font-size: 3vw;
+}
+
+.clear, .clearEntry {
+    background-color: steelblue;
+}
+
+.operator {
+    background-color: darkred;
+}
+
+.equal {
+    background-color: darkgreen;
+}
+
+.number {
+    background-color: antiquewhite;
+}
+
+.clear, .clearEntry, .operator, .number, .equal {
+    border: solid;
+}
