@@ -8,6 +8,7 @@ $(document).ready(init);
         $('.clear').click(calculator.clearArray);
         $('.number').click(calculator.doMath);
         $('.operator').click(calculator.doMath);
+        $('.equalSign').click(calculator.evaluate);
     }
 
     function CalculatorApp(value, inputArray){ //create space for value and inputArray
@@ -88,6 +89,49 @@ $(document).ready(init);
                     console.log('newArray:', newArray);
                 }
             }
+        }
+        this.evaluate = function(){
+            let newValue = [];
+            let value = null;
+            let itemsToRemove = 0;
+            let operator = inputArray[1];
+            let num1 = inputArray[0];
+            let num2 = calculator.num2
+
+            for(var inputIndex = 0; inputIndex <= inputArray.length - 1; inputIndex++){
+
+                if(typeof inputArray[inputIndex] === "string" && !isNaN(inputArray[inputIndex])){
+                    newValue.push(inputArray[inputIndex]);
+                    itemsToRemove = itemsToRemove + 1;          //add count for numbers to remove for splice
+
+                    if(inputIndex === inputArray.length - 1){
+                        newValue = newValue.join("");
+                        num2 = parseFloat(newValue);
+                        inputArray.splice(2, itemsToRemove, num2);
+                        console.log('inputArray: ', inputArray);
+                    }
+                }
+            }
+            switch(operator){
+                case '+':
+                    value = num1 + num2;
+                    break;
+                case '-':
+                    value = num1 - num2;
+                    break;
+                case '*':
+                case 'x':
+                case 'X':
+                    value = num1 * num2;
+                    break;
+                case '/':
+                    value = num1 / num2;
+            }
+            num1 = value;
+            inputArray = [value];
+            $('.calculatorScreen').val(value);
+            console.log('typeof inputArray: ', typeof inputArray[2]);
+            console.log('= : clicked', 'inputArray: ', inputArray);
         }
     }
 
