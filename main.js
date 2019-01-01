@@ -6,6 +6,7 @@ $(document).ready(init);
 
     function attachEventHandlers(){
         $('.clear').click(calculator.clearArray);
+        $('.clearEntry').click(calculator.clearEntry);
         $('.number').click(calculator.doMath);
         $('.operator').click(calculator.doMath);
         $('.equalSign').click(calculator.evaluate);
@@ -48,9 +49,20 @@ $(document).ready(init);
             console.log('inputArray: ', inputArray, 'value: ', value);
         }
 
+        this.clearEntry = function(){
+            if(inputArray.length > 0){
+                inputArray.pop();
+                $('.calculatorScreen').val(inputArray);
+                console.log("clearEntry called");
+            }
+        }
+
         this.doMath = function(num1, num2, operator){ //assign value to appropriate parameter
             value = $(this).text();
-            const storedOpsArray = Object.values(calculator.storedOperators);
+            let inputArrayString = "" + inputArray;
+            let opsRegex = inputArrayString.match(/[\+\-\*\/]/g);
+
+
             
             this.num1 = num1;
             this.num2 = num2;
@@ -58,7 +70,7 @@ $(document).ready(init);
 
             if(value in calculator.storedNumbers || value === "."){ //check for value in storedNumbers
 
-                if(isNaN(inputArray[inputArray.length - 1]) && inputArray.length !== 0 && value !== "." && inputArray.indexOf(".") > -1 && inputArray.indexOf("+", "-", "*", "/") > -1 || isNaN(inputArray[1]) && inputArray.length > 1 && inputArray.indexOf(".") === -1 && value !== "." && inputArray.indexOf("+", "-", "*", "/")){//if last item if inputArray is not a number OR second item in array is NaN -----NUM2
+                if(isNaN(inputArray[inputArray.length - 1]) && inputArray.length !== 0 && value !== "." && inputArray.indexOf(".") > -1 && opsRegex || isNaN(inputArray[1]) && inputArray.length > 1 && inputArray.indexOf(".") === -1 && value !== "." && opsRegex){//if last item if inputArray is not a number OR second item in array is NaN -----NUM2
                     num2 = value;
                     inputArray.push(num2);
                     $('.calculatorScreen').val(num2);
@@ -111,7 +123,7 @@ $(document).ready(init);
             let num1 = inputArray[0];
             let num2 = calculator.num2
 
-            for(var inputIndex = 0; inputIndex <= inputArray.length - 1; inputIndex++){
+            for(var inputIndex = 2; inputIndex <= inputArray.length - 1; inputIndex++){
 
                 if(typeof inputArray[inputIndex] === "string" && !isNaN(inputArray[inputIndex]) || typeof inputArray[inputIndex] === "string" && inputArray.indexOf(".") > -1){
                     newValue.push(inputArray[inputIndex]);
