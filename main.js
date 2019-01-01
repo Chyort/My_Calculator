@@ -122,6 +122,9 @@ $(document).ready(init);
             let operator = inputArray[1];
             let num1 = inputArray[0];
             let num2 = calculator.num2
+            let newNum1 = null;
+            let newNum2 = null;
+            let newValueDigits = null;
 
             for(var inputIndex = 2; inputIndex <= inputArray.length - 1; inputIndex++){
 
@@ -153,6 +156,16 @@ $(document).ready(init);
                 case '/':
                     value = num1 / num2;
             }
+
+            newNum1 = (num1 + '').replace('.', '').length;
+            newNum2 = (num2 + '').replace('.', '').length;
+            newValueDigits = (value + '').replace('.', '').length;
+
+
+            if(newNum1 + newNum2 < newValueDigits){
+                value = parseFloat(value.toFixed(newNum1 + newNum2) - 1);
+            }
+
             num1 = value;
             inputArray = [value];
             $('.calculatorScreen').val(value);
