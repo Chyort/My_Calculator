@@ -76,7 +76,7 @@ $(document).ready(init);
                     $('.calculatorScreen').val(num2);
                     console.log('num2: ', num2);
 
-                } else if (inputArray.length === 0 && value !== "." || !isNaN(inputArray[inputArray.length - 1]) && num2 === undefined && value !== "." || num2 === undefined && inputArray.indexOf(".") === 1 && value !== "."){ //if last item of inputArray is a number -----NUM1
+                } else if (inputArray.length === 0 && value !== "." || !isNaN(inputArray[inputArray.length - 1]) && num2 === undefined && value !== "." || num2 === undefined && inputArray.indexOf(".") >= 1 && value !== "."){ //if last item of inputArray is a number -----NUM1
 
                     num1 = value;
                     inputArray.push(num1);
