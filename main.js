@@ -50,11 +50,42 @@ $(document).ready(init);
         }
 
         this.clearEntry = function(){
-            if(inputArray.length > 0){
+            if(inputArray.length > 1 && typeof inputArray[inputArray.length - 1] === "string"){
                 inputArray.pop();
-                $('.calculatorScreen').val(inputArray);
-                console.log("clearEntry called");
+                $('.calculatorScreen').val(inputArray.join(""));
+            } else if (inputArray.length >= 2 && inputArray[inputArray.length - 1] !== "" || inputArray.length === 1 && typeof inputArray[inputArray.length - 1] === "number" && isNaN(inputArray[0])){
+                inputArray[inputArray.length - 1] = "" + inputArray[inputArray.length - 1];
+                let stringNum = inputArray[inputArray.length - 1];
+                stringNum = stringNum.slice(0, -1);
+                inputArray[inputArray.length - 1] = stringNum;
+                $('.calculatorScreen').val(inputArray.join(""));
+            } else if (inputArray.length > 0){
+                if(typeof inputArray[inputArray.length -1] === "number"){
+                    let stringNum = "" + inputArray[inputArray.length - 1];
+                    if (stringNum.length > 1){
+                        stringNum = stringNum.slice(0, -1);
+                        inputArray[inputArray.length - 1] = stringNum;
+                        $('.calculatorScreen').val(inputArray.join(""));
+                    } else {
+                        inputArray = [];
+                        $('.calculatorScreen').val(0);
+                    }
+                } else if (typeof inputArray[inputArray.length -1] === "string"){
+                    let stringNum = inputArray[inputArray.length - 1];
+                    if(stringNum.length > 1){
+                        stringNum = stringNum.slice(0, -1);
+                        inputArray[inputArray.length - 1] = stringNum;
+                        $('.calculatorScreen').val(inputArray.join(""));
+                    } else {
+                        inputArray = [];
+                        $('.calculatorScreen').val(0);
+                    }
+                } else {
+                    inputArray = [];
+                    $('.calculatorScreen').val(0);
+                }
             }
+            console.log("inputArray: ", inputArray);
         }
 
         this.doMath = function(num1, num2, operator){ //assign value to appropriate parameter
@@ -163,7 +194,7 @@ $(document).ready(init);
 
 
             if(newNum1 + newNum2 < newValueDigits){
-                value = parseFloat(value.toFixed(newNum1 + newNum2) - 1);
+                value = parseFloat(value.toFixed(newNum1 + newNum2 - 1));
             }
 
             num1 = value;
