@@ -179,6 +179,12 @@ $(document).ready(init);
                     }
                 }
             }
+
+            if(inputArray.length === 1){
+                num1 = inputArray[0];
+                num2 = CalculatorApp.prototype.num2;
+                operator= CalculatorApp.prototype.operator;
+            }
             
             switch(operator){
                 case '+':
@@ -195,6 +201,11 @@ $(document).ready(init);
                 case '/':
                     value = num1 / num2;
             }
+
+            CalculatorApp.prototype.num1 = num1;
+            CalculatorApp.prototype.num2 = num2;
+            CalculatorApp.prototype.operator = operator;
+            console.log("calculator prototype: ", CalculatorApp.prototype);
 
             newNum1 = (num1 + '').replace('.', '').length;
             newNum2 = (num2 + '').replace('.', '').length;
