@@ -184,6 +184,8 @@ $(document).ready(init);
                 num1 = inputArray[0];
                 num2 = CalculatorApp.prototype.num2;
                 operator= CalculatorApp.prototype.operator;
+            } else if (inputArray.length === 2){
+                num2 = inputArray[0];
             }
             
             switch(operator){
