@@ -123,7 +123,7 @@ $(document).ready(init);
                         num1 = parseFloat(newValue);
                     }
                   
-                } else { //check for decimal in inputArray
+                } else if (num1 && inputArray.indexOf(".") === -1){ //check for decimal in inputArray
                     let decimal = value;
                     inputArray.push(decimal);
                 }
