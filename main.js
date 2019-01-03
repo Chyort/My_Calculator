@@ -109,6 +109,9 @@ $(document).ready(init);
 
                 } else if (inputArray.length === 0 && value !== "." || !isNaN(inputArray[inputArray.length - 1]) && num2 === undefined && value !== "." || num2 === undefined && inputArray.indexOf(".") >= 1 && value !== "."){ //if last item of inputArray is a number -----NUM1
 
+                    if(inputArray[0] === 0){
+                        inputArray = [];
+                    }
                     num1 = value;
                     inputArray.push(num1);
                     console.log('num1: ', num1);
@@ -132,6 +135,11 @@ $(document).ready(init);
                 console.log('inputArray: ', inputArray);
 
             } else if (value in calculator.storedOperators){//check for value in storedOperators ------OPERATOR
+                if(inputArray.length === 0){
+                    inputArray[0] = 0;
+                } else if (inputArrayString.includes(opsRegex)){
+                    calculator.evaluate();
+                }
                 let newValue = inputArray.join("");
                 num1 = parseFloat(newValue);
                 operator = value;
