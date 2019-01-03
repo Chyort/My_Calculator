@@ -180,10 +180,14 @@ $(document).ready(init);
                 }
             }
 
-            if(inputArray.length === 1){
+            if(inputArray.length === 1 && CalculatorApp.prototype.operator !== undefined){
                 num1 = inputArray[0];
                 num2 = CalculatorApp.prototype.num2;
                 operator= CalculatorApp.prototype.operator;
+            } else if(inputArray.length === 1 && CalculatorApp.prototype.operator === undefined){
+                num1 = parseFloat(num1);
+                num2 = 0;
+                operator = "+";
             } else if (inputArray.length === 2){
                 num2 = inputArray[0];
             }
@@ -202,6 +206,10 @@ $(document).ready(init);
                     break;
                 case '/':
                     value = num1 / num2;
+            }
+
+            if(!isFinite(value)){
+                return $('.calculatorScreen').val("Error");
             }
 
             CalculatorApp.prototype.num1 = num1;
