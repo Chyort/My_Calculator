@@ -19,7 +19,7 @@ $(document).ready(init);
 
         value = null;
         inputArray = [];
-
+      
         this.storedOperators = {
             '+':'+',
             '-':'-',
@@ -92,9 +92,9 @@ $(document).ready(init);
             value = $(this).text();
             let inputArrayString = "" + inputArray;
             let opsRegex = inputArrayString.match(/[\+\-\*\/]/g);
-
-
-            
+          
+          
+          
             this.num1 = num1;
             this.num2 = num2;
             this.operator = operator;
@@ -120,7 +120,7 @@ $(document).ready(init);
                         let newValue = inputArray.join("");
                         num1 = parseFloat(newValue);
                     }
-
+                  
                 } else if (num1 && inputArray.indexOf(".") > -1) { //check for decimal in inputArray
                     console.log(value, " is in the array!");
 
@@ -187,7 +187,7 @@ $(document).ready(init);
             } else if (inputArray.length === 2){
                 num2 = inputArray[0];
             }
-            
+
             switch(operator){
                 case '+':
                     value = num1 + num2;
